@@ -33,6 +33,8 @@ def ifvar(variable):
         except:
             return -1
     else:
+        if variable[0] == "#":
+            return ord(variable[1])
         return int(variable)
 
 # ------------------------
@@ -229,7 +231,10 @@ while True:
             pointer = pos
     
     if line[0] == "return":
-        pointer = stack.pop()
+        try:
+            pointer = stack.pop()
+        except:
+            pass
     
     if line[0] == "push":
         stack.append(ifvar(line[1]))
@@ -239,5 +244,8 @@ while True:
             var[line[3]] = ifvar(line[1]) % ifvar(line[2])
         except Exception as e:
             print("ERROR:", e)
+    
+    if line[0] == "flipstack":
+        stack.reverse()
 
     pointer = pointer + 1
