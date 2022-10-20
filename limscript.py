@@ -28,7 +28,10 @@ def ifvar(variable):
     if variable in var:
         return var[variable]
     elif variable == "pop":
-        return stack.pop()
+        try:
+            return stack.pop()
+        except:
+            return -1
     else:
         return int(variable)
 
