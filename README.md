@@ -18,6 +18,18 @@ get \[variable]: Get input and store it into the variable. If input is a string,
 
 exit \[code]: Exit program immediately with error code.
 
+subr \[name]: Define a subroutine.
+
+jsub \[subroutine]: Jump to a subroutine.
+
+jsubif \[subroutine]: Basically gotoif but for subroutines.
+
+return: Return from a subroutine.
+
+push \[value]: Push a value or variable to the stack.
+
+You can also do variable = pop to pop the top value off the stack.
+
 **Make sure to mark the end of a line with a semicolon! (;)**
 
 ## Usage
