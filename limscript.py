@@ -125,4 +125,7 @@ while True:
         except:
             var[line[1]] = ord(inp[0])
 
+    if line[0] == "exit":
+        exit(0)
+
     pointer = pointer + 1
