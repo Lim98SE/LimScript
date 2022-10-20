@@ -245,7 +245,19 @@ while True:
         except Exception as e:
             print("ERROR:", e)
     
+    if line[0] == "exp":
+        try:
+            var[line[3]] = pow(ifvar(line[1]), ifvar(line[2]))
+        except Exception as e:
+            print("ERROR:", e)
+    
     if line[0] == "flipstack":
         stack.reverse()
+    
+    if line[0] == "shift":
+        try:
+            var[line[3]] = ifvar(line[1]) << ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
 
     pointer = pointer + 1
