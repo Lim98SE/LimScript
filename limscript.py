@@ -1,13 +1,13 @@
 import sys
 
 try:
-  sys.argv[1]
- except:
-  print("Please give an argument.")
-  sys.exit(0)
+    sys.argv[1]
+except:
+    print("Please give an argument.")
+    sys.exit(0)
  
- with open(" ".join(sys.argv[1:])) as cfile:
-  code = cfile.read()
+with open(" ".join(sys.argv[1:])) as cfile:
+    code = cfile.read()
 
 var = {}
 labels = {}
