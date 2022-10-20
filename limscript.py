@@ -40,6 +40,29 @@ for i in lines:
         i[0]
     except:
         continue
+
+    if i[0] == "include":
+        file = " ".join(i[1:])
+
+        try:
+            with open(file) as code_file:
+                code += code_file.read()
+        except FileNotFoundError:
+            print("Could not import", file)
+
+lines = code.replace("\n", ";").split(";")
+
+# print(code)
+
+for i in range(len(lines)):
+    lines[i] = lines[i].strip()
+
+for i in lines:
+    i = i.strip().split()
+    try:
+        i[0]
+    except:
+        continue
     if i[0] == "label":
         labels[i[1]] = lines.index(" ".join(i))
     if i[0] == "subr":
@@ -52,8 +75,9 @@ while True:
         lines[pointer]
     except IndexError:
         break
-    line = lines[pointer].replace("openvar", str(open_value))
+    line = lines[pointer][:lines[pointer].find("//")] if "//" in lines[pointer] else lines[pointer]
     line = line.split()
+
     try:
         line[0]
     except:
@@ -206,5 +230,11 @@ while True:
     
     if line[0] == "push":
         stack.append(ifvar(line[1]))
+    
+    if line[0] == "mod":
+        try:
+            var[line[3]] = ifvar(line[1]) % ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
 
     pointer = pointer + 1
