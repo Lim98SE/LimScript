@@ -16,6 +16,8 @@ gotoif \[label] \[value 1] \[operation] \[value 2]: Jump to the label if the ope
 
 get \[variable]: Get input and store it into the variable. If input is a string, it'll get the first character and store the ASCII value.
 
+exit \[code]: Exit program immediately with error code.
+
 **Make sure to mark the end of a line with a semicolon! (;)**
 
 ## Usage
