@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import yaml
 
 try:
     sys.argv[1]
@@ -13,10 +14,12 @@ with open(" ".join(sys.argv[1:])) as cfile:
 
 var = {}
 labels = {}
+functions = {}
 open_value = 0
 
 lines = code.replace("\n", ";").split(";")
-final = []
+
+stack = []
 
 for i in range(len(lines)):
     lines[i] = lines[i].strip()
@@ -24,10 +27,23 @@ for i in range(len(lines)):
 def ifvar(variable):
     if variable in var:
         return var[variable]
+    elif variable == "pop":
+        return stack.pop()
     else:
         return int(variable)
 
 # ------------------------
+
+for i in lines:
+    i = i.strip().split()
+    try:
+        i[0]
+    except:
+        continue
+    if i[0] == "label":
+        labels[i[1]] = lines.index(" ".join(i))
+    if i[0] == "subr":
+        functions[i[1]] = lines.index(" ".join(i))
 
 pointer = 0
 
@@ -82,9 +98,6 @@ while True:
         except Exception as e:
             print("ERROR:", e)
     
-    if line[0] == "label":
-        labels[line[1]] = lines.index(" ".join(line))
-    
     if line[0] == "goto":
         pointer = labels[line[1]]
     
@@ -127,5 +140,71 @@ while True:
 
     if line[0] == "exit":
         exit(ifvar(line[1]))
+    
+    if line[0] == "save":
+        try:
+            with open("prefs.yml") as prefs:
+                data = yaml.load(prefs, yaml.Loader)
+        except FileNotFoundError:
+            with open("prefs.yml", "w") as prefs:
+                yaml.dump({}, prefs, yaml.Dumper)
+                data = {}
+        
+        data[line[1]] = ifvar(line[2])
+
+        with open("prefs.yml", "w") as prefs:
+            yaml.dump(data, prefs, yaml.Dumper)
+    
+    if line[0] == "load":
+        try:
+            with open("prefs.yml") as prefs:
+                data = yaml.load(prefs, yaml.Loader)
+            
+            var[line[2]] = data[line[1]]
+        except FileNotFoundError:
+            print("Could not load file.")
+    
+    if line[0] == "subj":
+        stack.append(pointer)
+        pointer = functions[line[1]]
+    
+    if line[0] == "subjif":
+        pos = functions[line[1]]
+        val1 = ifvar(line[2])
+        val2 = ifvar(line[4])
+        try:
+            operation = line[3]
+        except IndexError:
+            operation = "!="
+        
+        if val1 != val2 and operation == "!=":
+            stack.append(pointer)
+            pointer = pos
+        
+        if val1 == val2 and operation == "==":
+            stack.append(pointer)
+            pointer = pos
+        
+        if val1 >= val2 and operation == ">=":
+            stack.append(pointer)
+            pointer = pos
+        
+        if val1 <= val2 and operation == "<=":
+            stack.append(pointer)
+            pointer = pos
+        
+        if val1 > val2 and operation == ">":
+            stack.append(pointer)
+            pointer = pos
+        
+        if val1 < val2 and operation == "<":
+            stack.append(pointer)
+            pointer = pos
+    
+    if line[0] == "return":
+        pointer = stack.pop()
+    
+    if line[0] == "push":
+        stack.append(ifvar(line[1]))
 
     pointer = pointer + 1
