@@ -126,6 +126,6 @@ while True:
             var[line[1]] = ord(inp[0])
 
     if line[0] == "exit":
-        exit(isvar(line[1]))
+        exit(ifvar(line[1]))
 
     pointer = pointer + 1
