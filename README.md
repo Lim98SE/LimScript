@@ -2,37 +2,110 @@
 
 ## Commands
 
-var \[name] = \[value]: Define a variable. Use # to get the value of an ASCII character. For example, x = #x.
+### Variables
 
-print / printval \[value or variable]: Print out a variable or value. **print** will print as an ASCII character and **printval** will print as an integer with a newline.
+ - `var [name] = [value]`
+   - Define a variable. Use # to get the value of an ASCII character. For example, `x = #x`.
 
-add / sub / mul / div / mod / exp / band / bor / bxor / shift \[value 1] \[value 2] \[result variable]: Preform an operation on the specified values and store it into the variable specified. A variable can be created when using this command.
+### Input / Output
 
-label \[name]: Store that line as a label.
+ - `print [name / value]` / `printval [name / value]`
+   - Print out a variable / value.
+     - `print` will print an ASCII character (e.g, `print 65` will print a capital A)
+     - `printval` will print the value as an integer (e.g, `printval 65` will actually print `65`)
 
-goto \[label]: Jump the pointer to a label.
+ - `get [name]`
+   - Get input and store the first ASCII character value in the variable. (e.g, when you input `Andromeda`, the ASCII value of `A` will be stored.)
 
-gotoif \[label] \[value 1] \[operation] \[value 2]: Jump to the label if the operation is true. Operations can be **==**, **!=**, **>**, **<**, **>=**, or **<=**.
+### Arithmetic / Bitwise operations
+*It is possible to create new variables using these commands.*
 
-get \[variable]: Get input and store it into the variable. If input is a string, it'll get the first character and store the ASCII value.
+#### Arithmetic
 
-exit \[code]: Exit program immediately with error code.
+ - `add [value 1] [value 2] [result variable]`
+   - Add value 1 to value 2 and store in result variable.
 
-subr \[name]: Define a subroutine.
+ - `sub [value 1] [value 2] [result variable]`
+   - Subtract value 2 from value 1 and store in result variable.
 
-subj \[subroutine]: Jump to a subroutine.
+ - `mul [value 1] [value 2] [result variable]`
+   - Multiply value 1 times value 2 and store in result variable.
 
-subjif \[subroutine]: Basically gotoif but for subroutines.
+ - `div [value 1] [value 2] [result variable]`
+   - Divide value 1 by value 2 and store in result variable.
 
-return: Return from a subroutine.
+ - `mod [value 1] [value 2] [result variable]`
+   - Calculate remainder from value 1 divided by value 2 and store in result variable.
 
-push \[value]: Push a value or variable to the stack.
+ - `exp [value 1] [value 2] [result variable]`
+   - Calculate value 1 to the power of value 2 and store in result variable.
 
-include \[file]: Append a file's code to your code. It's library stuff.
+#### Bitwise operations
 
-flipstack: Flips the stack.
+ - `band [value 1] [value 2] [result variable]` (**b**itwise **and**)
+   - Calculate value 1 & value 2, and store in result variable.
 
-You can also do variable = pop to pop the top value off the stack.
+ - `bor [value 1] [value 2] [result variable]`
+   - Calculate value 1 | value 2, and store in result variable.
+
+ - `bxor [value 1] [value 2] [result variable]`
+   - Calculate value 1 ^ value 2, and store in result variable.
+
+ - `shift [value 1] [value 2] [result variable]`
+   - Shift value 1 by value 2 bits, and store in result variable.
+
+### Control flow
+
+#### Goto / Jumps
+
+ - `label [name]`
+   - Assign a label to this line.
+
+ - `goto [label]`
+   - Jump to a label.
+
+ - `gotoif [label] [value 1] [operation] [value 2]`
+   - Jump to a label under a condition.
+     - Available operations are: `==`, `!=`, `>`, `<`, `>=` and `<=`.
+     - Example: Jump to label `myLabel` if variable `myVar` is more than the ASCII value of `A`.  
+       `gotoif myLabel myVar > #A`
+
+#### Subroutines
+
+ - `subr [name]`
+   - Define a subroutine here.
+
+ - `subj [subroutine]`
+   - "Call" a subroutine.
+
+ - `subjif [subroutine] [value 1] [operation] [value 2]`
+   - "Call" a sobroutine under a condition.
+     - Same syntax as [gotoif](#goto--jumps).
+
+ - `return`
+   - Return from a subroutine.
+
+~~subroutines example needed~~
+
+### Stack
+
+ - `push [value]`
+   - Push a value or a variable to the stack.
+
+ - `[variable] = pop` (~~weird syntax, will change in the future~~)
+   - Store and then remove the top value on the stack in a variable.
+
+ - `flipstack`
+   - Flip the stack.
+
+### Miscellaneous
+
+ - `include [file]`
+   - Import another LimScript file.
+     - Essentially copies the file's content to this position.
+
+ - `exit [code]`
+   - Exit program immediately with error code.
 
 **Make sure to mark the end of a line with a semicolon! (;)**
 
