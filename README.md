@@ -40,6 +40,9 @@
  - `exp [value 1] [value 2] [result variable]`
    - Calculate value 1 to the power of value 2 and store in result variable.
 
+ - `sqrt [value 1] [result variable]`
+   - Calculate the square root of value 1 and store in result variable.
+
 #### Bitwise operations
 
  - `band [value 1] [value 2] [result variable]` (**b**itwise **and**)
@@ -181,4 +184,32 @@ var a = r;
 printval r;
 add i 1 i;
 gotoif loop i <= 10;
+```
+
+### Quadratic Formula
+
+```
+get a;
+get b;
+get c;
+
+mul a c discrimiator;
+mul discrimiator 4 discrimiator;
+exp b 2 temp;
+sub temp discrimiator discrimiator;
+sqrt discrimiator discrimiator;
+
+mul b -1 temp;
+add temp discrimiator the;
+mul 2 a temp;
+div the temp result;
+
+printval result;
+
+mul b -1 temp;
+sub temp discrimiator the;
+mul 2 a temp;
+div the temp result;
+
+printval result;
 ```

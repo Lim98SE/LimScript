@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from math import sqrt
 import sys
 import yaml
 import time
@@ -154,6 +155,12 @@ while True:
     if line[0] == "div":
         try:
             var[line[3]] = ifvar(line[1]) // ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
+    
+    if line[0] == "sqrt":
+        try:
+            var[line[2]] = int(sqrt(ifvar(line[1])))
         except Exception as e:
             print("ERROR:", e)
     
