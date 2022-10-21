@@ -2,6 +2,7 @@
 
 import sys
 import yaml
+import time
 
 try:
     sys.argv[1]
@@ -32,6 +33,8 @@ def ifvar(variable):
             return stack.pop()
         except:
             return -1
+    elif variable == "time":
+        return int(time.time())
     else:
         if variable[0] == "#":
             return ord(variable[1])
@@ -48,6 +51,8 @@ for i in lines:
 
     if i[0] == "include":
         file = " ".join(i[1:])
+
+        print("Importing", file)
 
         try:
             with open(file) as code_file:
@@ -257,6 +262,24 @@ while True:
     if line[0] == "shift":
         try:
             var[line[3]] = ifvar(line[1]) << ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
+    
+    if line[0] == "bxor":
+        try:
+            var[line[3]] = ifvar(line[1]) ^ ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
+    
+    if line[0] == "band":
+        try:
+            var[line[3]] = ifvar(line[1]) & ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
+    
+    if line[0] == "bor":
+        try:
+            var[line[3]] = ifvar(line[1]) | ifvar(line[2])
         except Exception as e:
             print("ERROR:", e)
 
