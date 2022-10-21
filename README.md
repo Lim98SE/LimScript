@@ -106,6 +106,32 @@
 
  - `exit [code]`
    - Exit program immediately with error code.
+  
+ - `str [name] = [string]`
+   - Define a string variable.
+ 
+ - `printstr [string]`
+   - Print a string to the console.
+ 
+ - `arr [name] = [ints seperated by ,]`
+   - Define an array variable.
+
+### Array Functions
+
+ - `getitem [array] [output] [index]`
+   - Get an item from an array.
+
+ - `append [array] [data]`
+   - Append data to an array.
+ 
+ - `pop [array] [output]`
+   - Pop the top value of an array into an output variable.
+ 
+ - `delete [array] [data]`
+   - Delete a value from an array.
+  
+ - `printarr [array]`
+   - Prints the array's contents to the console.
 
 **Make sure to mark the end of a line with a semicolon! (;)**
 
