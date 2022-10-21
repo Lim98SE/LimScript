@@ -1,4 +1,5 @@
 # LimScript
+*A non-esolang from me for the first time! It's pretty much a more practical version of Double...*
 
 ## Commands
 
