@@ -6,7 +6,7 @@ var \[name] = \[value]: Define a variable. Use # to get the value of an ASCII ch
 
 print / printval \[value or variable]: Print out a variable or value. **print** will print as an ASCII character and **printval** will print as an integer with a newline.
 
-add / sub / mul / div / mod \[value 1] \[value 2] \[result variable]: Preform an operation on the specified values and store it into the variable specified. A variable can be created when using this command.
+add / sub / mul / div / mod / exp / band / bor / bxor / shift \[value 1] \[value 2] \[result variable]: Preform an operation on the specified values and store it into the variable specified. A variable can be created when using this command.
 
 label \[name]: Store that line as a label.
 
@@ -20,15 +20,17 @@ exit \[code]: Exit program immediately with error code.
 
 subr \[name]: Define a subroutine.
 
-jsub \[subroutine]: Jump to a subroutine.
+subj \[subroutine]: Jump to a subroutine.
 
-jsubif \[subroutine]: Basically gotoif but for subroutines.
+subjif \[subroutine]: Basically gotoif but for subroutines.
 
 return: Return from a subroutine.
 
 push \[value]: Push a value or variable to the stack.
 
 include \[file]: Append a file's code to your code. It's library stuff.
+
+flipstack: Flips the stack.
 
 You can also do variable = pop to pop the top value off the stack.
 
