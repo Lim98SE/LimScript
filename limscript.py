@@ -14,9 +14,15 @@ with open(" ".join(sys.argv[1:])) as cfile:
     code = cfile.read()
 
 #code = """
-#label test;
-#print #e;
-#gotoif test 0 != 1;
+#var x = 7;
+#arr hello = 68, x, #E;
+#append hello #F;
+#remove hello #E;
+#printarr hello;
+#getitem hello char 0;
+#print char;
+#pop hello char;
+#print char;
 #"""
 
 var = {}

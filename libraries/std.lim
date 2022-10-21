@@ -1,0 +1,12 @@
+exit 0; // make it so you don't just run the functions on their own
+
+subr print_stack; // print stack function
+flipstack; // flip it around
+
+label ps_loop; // loop
+var chr = pop; // pop the top value of the stack
+gotoif ps_end chr == -1; // break out of the loop if there's nothing left (the value is -1)
+print chr; // print the character
+goto ps_loop; // loop
+label ps_end; // end
+return; // return to where the function was called
