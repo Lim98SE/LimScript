@@ -40,6 +40,9 @@
  - `exp [value 1] [value 2] [result variable]`
    - Calculate value 1 to the power of value 2 and store in result variable.
 
+ - `sqrt [value 1] [result variable]`
+   - Calculate the square root of value 1 and store in result variable.
+
 #### Bitwise operations
 
  - `band [value 1] [value 2] [result variable]` (**b**itwise **and**)
