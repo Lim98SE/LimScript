@@ -1,51 +1,111 @@
 # LimScript
-*A non-esolang from me for the first time! It's pretty much a more practical version of Double...*
 
 ## Commands
 
-var \[name] = \[value]: Define a variable. Use # to get the value of an ASCII character. For example, x = #x.
+### Variables
 
-print / printval \[value or variable]: Print out a variable or value. **print** will print as an ASCII character and **printval** will print as an integer with a newline.
+ - `var [name] = [value]`
+   - Define a variable. Use # to get the value of an ASCII character. For example, `x = #x`.
 
-printstr \[string variable]: Print the string.
+### Input / Output
 
-printarr \[array variable]: Print the array.
+ - `print [name / value]` / `printval [name / value]`
+   - Print out a variable / value.
+     - `print` will print an ASCII character (e.g, `print 65` will print a capital A)
+     - `printval` will print the value as an integer (e.g, `printval 65` will actually print `65`)
 
-add / sub / mul / div / mod / exp / band / bor / bxor / shift \[value 1] \[value 2] \[result variable]: Preform an operation on the specified values and store it into the variable specified. A variable can be created when using this command.
+ - `get [name]`
+   - Get input and store the first ASCII character value in the variable. (e.g, when you input `Andromeda`, the ASCII value of `A` will be stored.)
 
-label \[name]: Store that line as a label.
+### Arithmetic / Bitwise operations
+*It is possible to create new variables using these commands.*
 
-goto \[label]: Jump the pointer to a label.
+#### Arithmetic
 
-gotoif \[label] \[value 1] \[operation] \[value 2]: Jump to the label if the operation is true. Operations can be **==**, **!=**, **>**, **<**, **>=**, or **<=**.
+ - `add [value 1] [value 2] [result variable]`
+   - Add value 1 to value 2 and store in result variable.
 
-get \[variable]: Get input and store it into the variable. If input is a string, it'll get the first character and store the ASCII value.
+ - `sub [value 1] [value 2] [result variable]`
+   - Subtract value 2 from value 1 and store in result variable.
 
-exit \[code]: Exit program immediately with error code.
+ - `mul [value 1] [value 2] [result variable]`
+   - Multiply value 1 times value 2 and store in result variable.
 
-subr \[name]: Define a subroutine.
+ - `div [value 1] [value 2] [result variable]`
+   - Divide value 1 by value 2 and store in result variable.
 
-subj \[subroutine]: Jump to a subroutine.
+ - `mod [value 1] [value 2] [result variable]`
+   - Calculate remainder from value 1 divided by value 2 and store in result variable.
 
-subjif \[subroutine]: Basically gotoif but for subroutines.
+ - `exp [value 1] [value 2] [result variable]`
+   - Calculate value 1 to the power of value 2 and store in result variable.
 
-return: Return from a subroutine.
+#### Bitwise operations
 
-push \[value]: Push a value or variable to the stack.
+ - `band [value 1] [value 2] [result variable]` (**b**itwise **and**)
+   - Calculate value 1 & value 2, and store in result variable.
 
-include \[file]: Append a file's code to your code. It's library stuff.
+ - `bor [value 1] [value 2] [result variable]`
+   - Calculate value 1 | value 2, and store in result variable.
 
-flipstack: Flips the stack.
+ - `bxor [value 1] [value 2] [result variable]`
+   - Calculate value 1 ^ value 2, and store in result variable.
 
-You can also do variable = pop to pop the top value off the stack, or variable = time to get time.time() as the variable.
+ - `shift [value 1] [value 2] [result variable]`
+   - Shift value 1 by value 2 bits, and store in result variable.
 
-getitem \[array] \[index] \[output]: Get the item of an array at an index.
+### Control flow
 
-append \[array] \[value]: Append a value to an array.
+#### Goto / Jumps
 
-pop \[array] \[output]: Pop the top value of an array to an output variable.
+ - `label [name]`
+   - Assign a label to this line.
 
-remove \[array] \[value]: Remove a value from an array.
+ - `goto [label]`
+   - Jump to a label.
+
+ - `gotoif [label] [value 1] [operation] [value 2]`
+   - Jump to a label under a condition.
+     - Available operations are: `==`, `!=`, `>`, `<`, `>=` and `<=`.
+     - Example: Jump to label `myLabel` if variable `myVar` is more than the ASCII value of `A`.  
+       `gotoif myLabel myVar > #A`
+
+#### Subroutines
+
+ - `subr [name]`
+   - Define a subroutine here.
+
+ - `subj [subroutine]`
+   - "Call" a subroutine.
+
+ - `subjif [subroutine] [value 1] [operation] [value 2]`
+   - "Call" a sobroutine under a condition.
+     - Same syntax as [gotoif](#goto--jumps).
+
+ - `return`
+   - Return from a subroutine.
+
+~~subroutines example needed~~
+
+### Stack
+
+ - `push [value]`
+   - Push a value or a variable to the stack.
+
+ - `[variable] = pop` (~~weird syntax, will change in the future~~)
+   - Store and then remove the top value on the stack in a variable.
+
+ - `flipstack`
+   - Flip the stack.
+
+### Miscellaneous
+
+ - `include [file]`
+   - Import another LimScript file.
+     - Essentially copies the file's content to this position.
+
+ - `exit [code]`
+   - Exit program immediately with error code.
 
 **Make sure to mark the end of a line with a semicolon! (;)**
 
@@ -57,8 +117,20 @@ remove \[array] \[value]: Remove a value from an array.
 
 ### Hello, World
 ```
-str hello = Hello, world!;
-printstr hello;
+print #H;
+print #e;
+print #l;
+print #l;
+print #o;
+print #,;
+print 32;
+print #w;
+print #o;
+print #r;
+print #l;
+print #d;
+print #!;
+print 10;
 ```
 ### Truth Machine
 ```
@@ -80,59 +152,4 @@ var a = r;
 printval r;
 add i 1 i;
 gotoif loop i <= 10;
-```
-### Calculator
-```
-print #A; print #:;
-get a;
-str op_txt = Operator (+, -, x, /, ^, %):;
-printstr op_txt;
-get operator;
-print #B; print #:;
-get b;
-
-printval a;
-print operator;
-print 10;
-printval b;
-print #=;
-print 10;
-
-gotoif add operator == #+;
-gotoif sub operator == #-;
-gotoif mul operator == #x;
-gotoif div operator == #/;
-gotoif pow operator == #^;
-gotoif mod operator == #%;
-goto add;
-
-exit 0;
-
-label add;
-add a b out;
-goto finish;
-
-label sub;
-sub a b out;
-goto finish;
-
-label mul;
-mul a b out;
-goto finish;
-
-label div;
-div a b out;
-goto finish;
-
-label mod;
-mod a b out;
-goto finish;
-
-label pow;
-exp a b out;
-goto finish;
-
-label finish;
-printval out;
-exit 0;
 ```
