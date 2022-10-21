@@ -4,16 +4,30 @@ import sys
 import yaml
 import time
 
-try:
-    sys.argv[1]
-except:
-    print("Please give an argument.")
-    sys.exit(0)
- 
-with open(" ".join(sys.argv[1:])) as cfile:
-    code = cfile.read()
+#try:
+#    sys.argv[1]
+#except:
+#    print("Please give an argument.")
+#    sys.exit(0)
+# 
+#with open(" ".join(sys.argv[1:])) as cfile:
+#    code = cfile.read()
+
+code = """
+var x = 7;
+arr hello = 68, x, #E;
+append hello #F;
+remove hello #E;
+printarr hello;
+getitem hello char 0;
+print char;
+pop hello char;
+print char;
+"""
 
 var = {}
+strings = {}
+arrays = {}
 labels = {}
 functions = {}
 open_value = 0
@@ -35,10 +49,10 @@ def ifvar(variable):
             return -1
     elif variable == "time":
         return int(time.time())
-    else:
+    elif not isinstance(variable, int):
         if variable[0] == "#":
             return ord(variable[1])
-        return int(variable)
+    return int(variable)
 
 # ------------------------
 
@@ -96,9 +110,20 @@ while True:
     if line[0] == "var":
         i = " ".join(line).replace("var ", "").replace(" ", "")
         d = i.split("=")
-        if d[1][0] == "#":
-            d[1] = ord(d[1][1])
         var[d[0]] = ifvar(d[1])
+    
+    if line[0] == "str":
+        i = " ".join(line).replace("str ", "")
+        d = i.split("=")
+        strings[d[0].strip()] = " ".join(d[1:]).strip()
+    
+    if line[0] == "arr":
+        i = " ".join(line).replace("arr ", "")
+        d = i.split("=")
+        arrays[d[0].strip()] = (" ".join(d[1:]).strip()).split(",")
+        
+        for i in range(len(arrays[d[0].strip()])):
+            arrays[d[0].strip()][i] = ifvar(arrays[d[0].strip()][i].strip())
     
     if line[0] == "print":
         try:
@@ -139,27 +164,9 @@ while True:
         pos = labels[line[1]]
         val1 = ifvar(line[2])
         val2 = ifvar(line[4])
-        try:
-            operation = line[3]
-        except IndexError:
-            operation = "!="
-        
-        if val1 != val2 and operation == "!=":
-            pointer = pos
-        
-        if val1 == val2 and operation == "==":
-            pointer = pos
-        
-        if val1 >= val2 and operation == ">=":
-            pointer = pos
-        
-        if val1 <= val2 and operation == "<=":
-            pointer = pos
-        
-        if val1 > val2 and operation == ">":
-            pointer = pos
-        
-        if val1 < val2 and operation == "<":
+        operation = line[3]
+            
+        if eval(f"{val1} {operation} {val2}"):
             pointer = pos
     
     if line[0] == "printval":
@@ -206,35 +213,12 @@ while True:
         pos = functions[line[1]]
         val1 = ifvar(line[2])
         val2 = ifvar(line[4])
-        try:
-            operation = line[3]
-        except IndexError:
-            operation = "!="
+        operation = line[3]
         
-        if val1 != val2 and operation == "!=":
+        if eval(f"{val1} {operation} {val2}"):
             stack.append(pointer)
             pointer = pos
-        
-        if val1 == val2 and operation == "==":
-            stack.append(pointer)
-            pointer = pos
-        
-        if val1 >= val2 and operation == ">=":
-            stack.append(pointer)
-            pointer = pos
-        
-        if val1 <= val2 and operation == "<=":
-            stack.append(pointer)
-            pointer = pos
-        
-        if val1 > val2 and operation == ">":
-            stack.append(pointer)
-            pointer = pos
-        
-        if val1 < val2 and operation == "<":
-            stack.append(pointer)
-            pointer = pos
-    
+
     if line[0] == "return":
         try:
             pointer = stack.pop()
@@ -282,5 +266,28 @@ while True:
             var[line[3]] = ifvar(line[1]) | ifvar(line[2])
         except Exception as e:
             print("ERROR:", e)
+    
+    if line[0] == "printstr":
+        try:
+            print(strings[line[1]])
+        except Exception as e:
+            print("ERROR:",e)
+    
+    if line[0] == "getitem":
+        if line[1].strip() in arrays:
+            var[line[2]] = arrays[line[1]][ifvar(line[3])]
+    
+    if line[0] == "append":
+        value = ifvar(line[2])
+        arrays[line[1].strip()].append(value)
+    
+    if line[0] == "pop":
+        var[line[2]] = arrays[line[1].strip()].pop()
+    
+    if line[0] == "remove":
+        arrays[line[1].strip()].remove(ifvar(line[2]))
+    
+    if line[0] == "printarr":
+        print(arrays[line[1].strip()])
 
     pointer = pointer + 1
