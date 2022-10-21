@@ -6,6 +6,10 @@ var \[name] = \[value]: Define a variable. Use # to get the value of an ASCII ch
 
 print / printval \[value or variable]: Print out a variable or value. **print** will print as an ASCII character and **printval** will print as an integer with a newline.
 
+printstr \[string variable]: Print the string.
+
+printarr \[array variable]: Print the array.
+
 add / sub / mul / div / mod / exp / band / bor / bxor / shift \[value 1] \[value 2] \[result variable]: Preform an operation on the specified values and store it into the variable specified. A variable can be created when using this command.
 
 label \[name]: Store that line as a label.
@@ -32,7 +36,15 @@ include \[file]: Append a file's code to your code. It's library stuff.
 
 flipstack: Flips the stack.
 
-You can also do variable = pop to pop the top value off the stack.
+You can also do variable = pop to pop the top value off the stack, or variable = time to get time.time() as the variable.
+
+getitem \[array] \[index] \[output]: Get the item of an array at an index.
+
+append \[array] \[value]: Append a value to an array.
+
+pop \[array] \[output]: Pop the top value of an array to an output variable.
+
+remove \[array] \[value]: Remove a value from an array.
 
 **Make sure to mark the end of a line with a semicolon! (;)**
 
@@ -44,20 +56,8 @@ You can also do variable = pop to pop the top value off the stack.
 
 ### Hello, World
 ```
-print #H;
-print #e;
-print #l;
-print #l;
-print #o;
-print #,;
-print 32;
-print #w;
-print #o;
-print #r;
-print #l;
-print #d;
-print #!;
-print 10;
+str hello = Hello, world!;
+printstr hello;
 ```
 ### Truth Machine
 ```
