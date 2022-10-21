@@ -5,11 +5,12 @@ class LimScriptLexer(Lexer):
 
     ignore = " \t\n"
 
+
+    TOKEN_VAR = r'var'
     TOKEN_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
     TOKEN_SEPARATOR = r';'
     TOKEN_NUMBER = r'\d+'
     TOKEN_ASCII = r'#[\x21-\x7E]'
-    TOKEN_VAR = r'var'
     TOKEN_EQUALS = r'='
 
 if __name__ == '__main__':
