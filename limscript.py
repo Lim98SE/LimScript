@@ -243,12 +243,18 @@ while True:
     if line[0] == "flipstack":
         stack.reverse()
     
-    if line[0] == "shift":
+    if line[0] == "shir":
+        try:
+            var[line[3]] = ifvar(line[1]) >> ifvar(line[2])
+        except Exception as e:
+            print("ERROR:", e)
+   
+    if line[0] == "shil":
         try:
             var[line[3]] = ifvar(line[1]) << ifvar(line[2])
         except Exception as e:
             print("ERROR:", e)
-    
+
     if line[0] == "bxor":
         try:
             var[line[3]] = ifvar(line[1]) ^ ifvar(line[2])

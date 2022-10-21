@@ -51,8 +51,11 @@
  - `bxor [value 1] [value 2] [result variable]`
    - Calculate value 1 ^ value 2, and store in result variable.
 
- - `shift [value 1] [value 2] [result variable]`
-   - Shift value 1 by value 2 bits, and store in result variable.
+ - `shir [value 1] [value 2] [result variable]`
+   - Shift right value 1 by value 2 bits, and store in result variable.
+
+ - `shil [value 1] [value 2] [result variable]`
+   - Shift left value 1 by value 2 bits, and store in result variable.
 
 ### Control flow
 
