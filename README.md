@@ -182,3 +182,31 @@ printval r;
 add i 1 i;
 gotoif loop i <= 10;
 ```
+
+### Quadratic Formula
+
+```
+get a;
+get b;
+get c;
+
+mul a c discrimiator;
+mul discrimiator 4 discrimiator;
+exp b 2 temp;
+sub temp discrimiator discrimiator;
+sqrt discrimiator discrimiator;
+
+mul b -1 temp;
+add temp discrimiator the;
+mul 2 a temp;
+div the temp result;
+
+printval result;
+
+mul b -1 temp;
+sub temp discrimiator the;
+mul 2 a temp;
+div the temp result;
+
+printval result;
+```
