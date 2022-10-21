@@ -80,3 +80,58 @@ printval r;
 add i 1 i;
 gotoif loop i <= 10;
 ```
+### Calculator
+```
+print #A; print #:;
+get a;
+str op_txt = Operator (+, -, x, /, ^, %):;
+printstr op_txt;
+get operator;
+print #B; print #:;
+get b;
+
+printval a;
+print operator;
+print 10;
+printval b;
+print #=;
+print 10;
+
+gotoif add operator == #+;
+gotoif sub operator == #-;
+gotoif mul operator == #x;
+gotoif div operator == #/;
+gotoif pow operator == #^;
+gotoif mod operator == #%;
+goto add;
+
+exit 0;
+
+label add;
+add a b out;
+goto finish;
+
+label sub;
+sub a b out;
+goto finish;
+
+label mul;
+mul a b out;
+goto finish;
+
+label div;
+div a b out;
+goto finish;
+
+label mod;
+mod a b out;
+goto finish;
+
+label pow;
+exp a b out;
+goto finish;
+
+label finish;
+printval out;
+exit 0;
+```
