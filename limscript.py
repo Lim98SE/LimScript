@@ -4,26 +4,26 @@ import sys
 import yaml
 import time
 
-#try:
-#    sys.argv[1]
-#except:
-#    print("Please give an argument.")
-#    sys.exit(0)
-# 
-#with open(" ".join(sys.argv[1:])) as cfile:
-#    code = cfile.read()
+try:
+    sys.argv[1]
+except:
+    print("Please give an argument.")
+    sys.exit(0)
+ 
+with open(" ".join(sys.argv[1:])) as cfile:
+    code = cfile.read()
 
-code = """
-var x = 7;
-arr hello = 68, x, #E;
-append hello #F;
-remove hello #E;
-printarr hello;
-getitem hello char 0;
-print char;
-pop hello char;
-print char;
-"""
+#code = """
+#var x = 7;
+#arr hello = 68, x, #E;
+#append hello #F;
+#remove hello #E;
+#printarr hello;
+#getitem hello char 0;
+#print char;
+#pop hello char;
+#print char;
+#"""
 
 var = {}
 strings = {}
