@@ -4,6 +4,17 @@ from math import sqrt
 import sys
 import yaml
 import time
+import pygame
+
+clock = pygame.time.Clock()
+
+window = pygame.display.set_mode((1280, 720))
+draw = pygame.Surface((640, 320))
+
+def update():
+    draw_scaled = pygame.transform.scale(draw, window.get_size())
+    window.blit(draw_scaled, (0, 0))
+    pygame.display.update()
 
 try:
     sys.argv[1]
@@ -148,7 +159,7 @@ while True:
     
     if line[0] == "mul":
         try:
-            var[line[3]] = ifvar(line[1]) * ifvar(line[2])
+            var[line[3]] = round(ifvar(line[1]) * ifvar(line[2]))
         except Exception as e:
             print("ERROR:", e)
     
@@ -302,5 +313,24 @@ while True:
     
     if line[0] == "printarr":
         print(arrays[line[1].strip()])
+    
+    if line[0] == "set":
+        draw.set_at((ifvar(line[1]), ifvar(line[2])), (ifvar(line[3]), ifvar(line[4]), ifvar(line[5])))
+    
+    if line[0] == "update":
+        update()
+    
+    if line[0] in functions:
+        stack.append(pointer)
+        pointer = functions[line[0]]
+    
+    if line[0] == "getkey":
+        for event in pygame.event.get(pygame.KEYDOWN):
+            var[line[1]] = event.key
+        for event in pygame.event.get(pygame.KEYUP):
+            var[line[1]] = -1
+
 
     pointer = pointer + 1
+
+    clock.tick(360 * 2)
