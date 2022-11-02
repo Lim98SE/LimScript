@@ -215,6 +215,7 @@ printval result;
 ```
 
 ### Bottles of Age-Appropriate Beverage
+#### (For Flask Interpreter)
 
 ```
 var bottles = 99;
