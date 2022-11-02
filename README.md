@@ -213,3 +213,33 @@ div the temp result;
 
 printval result;
 ```
+
+### Bottles of Age-Appropriate Beverage
+
+```
+var bottles = 99;
+var newline = 10;
+var space = 32;
+
+str line1 = bottles of age-appropriate beverage on the wall,;
+str line2 = bottles of age-appropriate beverage.;
+str line3 = Take one down, pass it around,
+str line4 = No more bottles of age-appropriate beverage on the wall!;
+
+
+label loop;
+printval bottles;
+print space;
+printstr line1;
+print newline;
+printval bottles;
+print space;
+printstr line2;
+print newline;
+printstr line3;
+sub bottles 1 bottles;
+print newline;
+gotoif loop bottles > 0;
+
+printstr line4;
+```
